@@ -19,6 +19,7 @@ from reportlab.platypus import (
 
 OUTPUT = Path(__file__).parent / "work-sample-summary.pdf"
 GITHUB = "https://github.com/tapareanjali391-tech/agent-guardrail-auditor"
+AUTHOR = "Anjali Tapare"
 
 ARCHITECTURE = """  Incoming Context (web pages, tool outputs, documents)
                           |
@@ -64,7 +65,17 @@ def build_styles():
             leading=14,
             alignment=TA_CENTER,
             textColor=colors.HexColor("#333333"),
-            spaceAfter=6,
+            spaceAfter=4,
+        ),
+        "author": ParagraphStyle(
+            "Author",
+            parent=base["Normal"],
+            fontName="Helvetica-Oblique",
+            fontSize=10,
+            leading=13,
+            alignment=TA_CENTER,
+            textColor=colors.HexColor("#555555"),
+            spaceAfter=8,
         ),
         "link": ParagraphStyle(
             "Link",
@@ -177,7 +188,7 @@ def main():
         topMargin=0.75 * inch,
         bottomMargin=0.75 * inch,
         title="Agent Guardrail Auditor — Work Sample Summary",
-        author="Agent Guardrail Auditor",
+        author=AUTHOR,
     )
 
     story = [
@@ -186,6 +197,7 @@ def main():
             "A safety framework for auditing autonomous LLM agent actions",
             styles["subtitle"],
         ),
+        Paragraph(f"Prepared by {AUTHOR}", styles["author"]),
         Paragraph(
             f'<a href="{GITHUB}" color="#0366d6">{GITHUB}</a>',
             styles["link"],
